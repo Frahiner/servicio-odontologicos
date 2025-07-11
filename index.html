@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicios Odontológicos - Clínica Dental Premium</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Navegación */
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+
+        nav a:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Secciones */
+        section {
+            margin-top: 80px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: #34495e;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            color: #2980b9;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Párrafos en columnas */
+        .columns {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .column {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .column:hover {
+            transform: translateY(-5px);
+        }
+
+        .column h3 {
+            color: #495057;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .column p {
+            color: #6c757d;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Imágenes */
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .image-item {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .image-item:hover {
+            transform: scale(1.05);
+        }
+
+        .image-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .image-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Imágenes con cambio al hover */
+        .hover-image {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            margin: 1rem 0;
+        }
+
+        .hover-image img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: opacity 0.3s ease;
+        }
+
+        .hover-image .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .hover-image:hover .image-overlay {
+            opacity: 1;
+        }
+
+        /* Formulario */
+        .form-container {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #495057;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        /* Tabla de servicios */
+        .services-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .services-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .services-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #e9ecef;
+            font-size: 1rem;
+        }
+
+        .services-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        /* Botones */
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Resumen de costos */
+        .cost-summary {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .cost-summary h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .cost-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #dee2e6;
+            font-size: 1.1rem;
+        }
+
+        .cost-item.total {
+            border-top: 2px solid #667eea;
+            border-bottom: none;
+            font-weight: bold;
+            font-size: 1.3rem;
+            color: #2c3e50;
+        }
+
+        /* Disponibilidad de citas */
+        .availability {
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+            border-left: 4px solid #28a745;
+        }
+
+        .availability.unavailable {
+            background: linear-gradient(135deg, #f8d7da 0%, #f1b0b7 100%);
+            border-left-color: #dc3545;
+        }
+
+        .availability h4 {
+            color: #155724;
+            margin-bottom: 0.5rem;
+        }
+
+        .availability.unavailable h4 {
+            color: #721c24;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .columns {
+                grid-template-columns: 1fr;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            section {
+                padding: 2rem 1rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#galeria">Galería</a></li>
+            <li><a href="#formulario">Reservar Cita</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <section id="inicio">
+            <h1>Clínica Dental Premium</h1>
+            <div class="columns">
+                <div class="column">
+                    <h3>Excelencia en Odontología</h3>
+                    <p>En nuestra clínica dental, nos dedicamos a brindar servicios odontológicos de la más alta calidad. Contamos con profesionales especializados y tecnología de vanguardia para garantizar el mejor cuidado de su salud bucal. Nuestro compromiso es proporcionar tratamientos efectivos y personalizados para cada paciente.</p>
+                </div>
+                <div class="column">
+                    <h3>Tecnología Avanzada</h3>
+                    <p>Utilizamos equipos de última generación y técnicas innovadoras para asegurar procedimientos seguros y eficaces. Nuestras instalaciones están diseñadas para ofrecer comodidad y tranquilidad durante su visita. Cada tratamiento se realiza con precisión y cuidado, utilizando materiales de primera calidad.</p>
+                </div>
+                <div class="column">
+                    <h3>Atención Personalizada</h3>
+                    <p>Cada paciente es único, por lo que desarrollamos planes de tratamiento específicos según sus necesidades particulares. Nuestro equipo se enfoca en crear una experiencia positiva y cómoda, brindando atención integral desde la consulta inicial hasta el seguimiento posterior al tratamiento.</p>
+                </div>
+            </div>
+
+            <div class="image-gallery">
+                <div class="image-item">
+                    <img src="https://www.colgate.com/content/dam/cp-sites/oral-care/oral-care-center/global/article/mouth-smiling-with-brackets.jpg.rendition.640.360.jpg" alt="Consultorio dental moderno">
+                </div>
+                <div class="image-item">
+                    <img src="https://clinicalbertorodriguez.com/wp-content/uploads/elementor/thumbs/Tecnologia-avanzada-en-odontologia-y-sus-beneficios-qrixfn2uz2jrou8onuxq8w0rdbxh8gzsiusyxqsrk8.webp">
+                </div>
+                <div class="image-item">
+                    <img src="https://gacetadental.com/wp-content/uploads/2023/04/odontologia-slow.jpg" alt="Tratamiento dental">
+                </div>
+            </div>
+        </section>
+
+        <section id="servicios">
+            <h2>Nuestros Servicios</h2>
+            <table class="services-table">
+                <thead>
+                    <tr>
+                        <th>Servicio</th>
+                        <th>Descripción</th>
+                        <th>Precio (USD)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Limpieza Dental</strong></td>
+                        <td>Limpieza profunda y eliminación de placa bacteriana</td>
+                        <td>$50.00</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Extracción Simple</strong></td>
+                        <td>Extracción de dientes con anestesia local</td>
+                        <td>$75.00</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Extracción Compleja</strong></td>
+                        <td>Extracción quirúrgica de dientes impactados</td>
+                        <td>$150.00</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ortodoncia - Consulta</strong></td>
+                        <td>Evaluación y plan de tratamiento ortodóncico</td>
+                        <td>$100.00</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ortodoncia - Brackets</strong></td>
+                        <td>Instalación de aparatos de ortodoncia</td>
+                        <td>$800.00</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="galeria">
+            <h2>Galería de Nuestras Instalaciones</h2>
+            
+            <div class="image-gallery">
+                <div class="image-item">
+                    <img src="https://www.ancar-online.com/wp-content/uploads/2019/05/111-sillas-de-dise%C3%B1o.jpg" alt="Sala de espera">
+                </div>
+                <div class="image-item">
+                    <img src="https://dentaldoktor.com/cdn/shop/articles/Como_se_organiza_un_consultorio_dental.jpg?v=1544108674" alt="Consultorio">
+                </div>
+            </div>
+
+            <div class="hover-image">
+                <img src="https://es.dentalalvarez.com/wp-content/uploads/2021/06/coronas-dentales-en-tijuana-fluorosis-antes-despues.png" alt="Antes del tratamiento y despues">
+                <img class="image-overlay" src="https://cdn.prod.website-files.com/66183cdcc69331bd58af1786/672cfebb967d2b6ff158d109_6690365f5d2aae27ae256565_antes-y-despues-blanqueamieno.jpeg" alt="antes y despues blancura">
+            </div>
+
+            <div class="hover-image">
+                <img src="https://www.odontologiacampistol.com/wp-content/uploads/2015/10/equip3.jpg" alt="personal dental">
+                <img class="image-overlay" src="https://dentalevamarcos.com/wp-content/uploads/2023/12/Odontolog%C3%ADa-Digital-Avances-Tecnol%C3%B3gicos-en-el-Cuidado-Dental.jpg" alt="Tecnología avanzada">
+            </div>
+        </section>
+
+        <section id="formulario">
+            <h2>Reservar Cita</h2>
+            <div class="form-container">
+                <form id="appointmentForm">
+                    <h3>Datos Personales del Paciente</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nombre">Nombre Completo:</label>
+                            <input type="text" id="nombre" name="nombre" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cedula">Cédula:</label>
+                            <input type="text" id="cedula" name="cedula" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="telefono">Teléfono:</label>
+                            <input type="tel" id="telefono" name="telefono" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                    </div>
+
+                    <h3>Información de la Cita</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="servicio">Servicio Requerido:</label>
+                            <select id="servicio" name="servicio" required>
+                                <option value="">Seleccione un servicio</option>
+                                <option value="limpieza" data-price="50">Limpieza Dental - $50.00</option>
+                                <option value="extraccion-simple" data-price="75">Extracción Simple - $75.00</option>
+                                <option value="extraccion-compleja" data-price="150">Extracción Compleja - $150.00</option>
+                                <option value="ortodoncia-consulta" data-price="100">Ortodoncia - Consulta - $100.00</option>
+                                <option value="ortodoncia-brackets" data-price="800">Ortodoncia - Brackets - $800.00</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="fecha">Fecha de la Consulta:</label>
+                            <input type="date" id="fecha" name="fecha" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="hora">Hora:</label>
+                            <select id="hora" name="hora" required>
+                                <option value="">Seleccione una hora</option>
+                                <option value="08:00">08:00 AM</option>
+                                <option value="09:00">09:00 AM</option>
+                                <option value="10:00">10:00 AM</option>
+                                <option value="11:00">11:00 AM</option>
+                                <option value="14:00">02:00 PM</option>
+                                <option value="15:00">03:00 PM</option>
+                                <option value="16:00">04:00 PM</option>
+                                <option value="17:00">05:00 PM</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="availability-check" class="availability" style="display: none;">
+                        <h4>Disponibilidad de Cita</h4>
+                        <p id="availability-message"></p>
+                    </div>
+
+                    <div class="cost-summary">
+                        <h3>Resumen de Costos</h3>
+                        <div class="cost-item">
+                            <span>Subtotal:</span>
+                            <span id="subtotal">$0.00</span>
+                        </div>
+                        <div class="cost-item">
+                            <span>IVA (12%):</span>
+                            <span id="iva">$0.00</span>
+                        </div>
+                        <div class="cost-item total">
+                            <span>Total a Pagar:</span>
+                            <span id="total">$0.00</span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn">Reservar Cita</button>
+                </form>
+            </div>
+        </section>
+
+        <section id="contacto">
+            <h2>Información de Contacto</h2>
+            <div class="columns">
+                <div class="column">
+                    <h3>Dirección</h3>
+                    <p>Av. Principal Universitaria<br>Centro Médico Premium<br>Piso 4, Consultorio 888<br>San Antonio, Venezuela</p>
+                </div>
+                <div class="column">
+                    <h3>Teléfonos</h3>
+                    <p>Recepción: (212) 321-888<br>Emergencias: (212) 321-4848<br>WhatsApp: (412) 393-4848</p>
+                </div>
+                <div class="column">
+                    <h3>Horarios</h3>
+                    <p>Lunes a Viernes: 8:00 AM - 6:00 PM<br>Sábados: 9:00 AM - 1:00 PM<br>Domingos: Cerrado</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+   …
+  </section>
+</div>
+
+<script type="module">
+  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+
+  // credenciales de Supabase
+  const supabaseUrl = 'https://fljihpqoiqjvbhxljant.supabase.co'
+  const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZsamlocHFvaXFqdmJoeGxqYW50Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTIyNTQ1ODIsImV4cCI6MjA2NzgzMDU4Mn0.zADJX5s5K5joQLID91WZfCNZjndTY2VpTVO0bZD1vZg'
+
+  // 1) Inicializar Supabase
+  const supabase = createClient(supabaseUrl, supabaseKey)
+  window.supabase = supabase
+  console.log('SupabaseClient cargado →', supabase)
+
+  // 3) Función para calcular costos
+  function calculateCost() {
+    const sel = document.getElementById('servicio')
+    const opt = sel.options[sel.selectedIndex]
+    if (!opt.value) {
+      document.getElementById('subtotal').textContent = '$0.00'
+      document.getElementById('iva').textContent      = '$0.00'
+      document.getElementById('total').textContent    = '$0.00'
+      return
+    }
+    const price    = parseFloat(opt.dataset.price)
+    const subtotal = price
+    const iva      = subtotal * 0.12
+    const total    = subtotal + iva
+
+    document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`
+    document.getElementById('iva').textContent      = `$${iva.toFixed(2)}`
+    document.getElementById('total').textContent    = `$${total.toFixed(2)}`
+  }
+
+  // 4) Verificar disponibilidad con Supabase
+  async function checkAvailability() {
+    const fecha = document.getElementById('fecha').value
+    const hora  = document.getElementById('hora').value
+    if (!fecha || !hora) return
+
+    const { data, error } = await supabase
+      .from('appointments')
+      .select('id')
+      .eq('fecha', fecha)
+      .eq('hora', hora)
+
+    const div = document.getElementById('availability-check')
+    const msg = document.getElementById('availability-message')
+    div.style.display = 'block'
+
+    if (error) {
+      div.className = 'availability unavailable'
+      msg.textContent = 'Error al verificar disponibilidad.'
+    } else if (data.length) {
+      div.className = 'availability unavailable'
+      msg.textContent = 'Horario ya ocupado, elige otro.'
+    } else {
+      div.className = 'availability'
+      msg.textContent = '¡Horario disponible!'
+    }
+  }
+
+  // 5) Enviar formulario a Supabase
+  async function submitForm(e) {
+    e.preventDefault()
+    const f = e.target
+    const record = {
+      nombre:   f.nombre.value,
+      cedula:   f.cedula.value,
+      telefono: f.telefono.value,
+      email:    f.email.value,
+      servicio: f.servicio.value,
+      fecha:    f.fecha.value,
+      hora:     f.hora.value
+    }
+
+    const { data, error } = await supabase
+      .from('appointments')
+      .insert([ record ])
+
+    if (error) {
+      alert('Error al reservar: ' + error.message)
+    } else {
+      alert(`¡Cita reservada!
+Paciente: ${record.nombre}
+Servicio: ${record.servicio}
+Fecha: ${record.fecha}
+Hora: ${record.hora}
+Total: ${document.getElementById('total').textContent}`)
+      f.reset()
+      calculateCost()
+      document.getElementById('availability-check').style.display = 'none'
+    }
+  }
+
+  // 6) Listeners y fecha mínima
+  document.getElementById('servicio').addEventListener('change', calculateCost)
+  document.getElementById('fecha').addEventListener('change', checkAvailability)
+  document.getElementById('hora').addEventListener('change', checkAvailability)
+  document.getElementById('appointmentForm').addEventListener('submit', submitForm)
+  document.getElementById('fecha').min = new Date().toISOString().split('T')[0]
+
+  // 7) Cálculo inicial
+  calculateCost()
+</script>
+</body>
+</html>
