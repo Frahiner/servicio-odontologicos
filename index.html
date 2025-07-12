@@ -615,12 +615,12 @@ body {
   const supabaseUrl = 'https://fljihpqoiqjvbhxljant.supabase.co'
   const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZsamlocHFvaXFqdmJoeGxqYW50Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTIyNTQ1ODIsImV4cCI6MjA2NzgzMDU4Mn0.zADJX5s5K5joQLID91WZfCNZjndTY2VpTVO0bZD1vZg'
 
-  // 1) Inicializar Supabase
+  // Inicializar Supabase
   const supabase = createClient(supabaseUrl, supabaseKey)
   window.supabase = supabase
   console.log('SupabaseClient cargado →', supabase)
 
-  // 3) Función para calcular costos
+  // Función para calcular costos
   function calculateCost() {
     const sel = document.getElementById('servicio')
     const opt = sel.options[sel.selectedIndex]
@@ -640,7 +640,7 @@ body {
     document.getElementById('total').textContent    = `$${total.toFixed(2)}`
   }
 
-  // 4) Verificar disponibilidad con Supabase
+  // Verificar disponibilidad con Supabase
   async function checkAvailability() {
     const fecha = document.getElementById('fecha').value
     const hora  = document.getElementById('hora').value
@@ -668,7 +668,7 @@ body {
     }
   }
 
-  // 5) Enviar formulario a Supabase
+  // Enviar formulario a Supabase
   async function submitForm(e) {
     e.preventDefault()
     const f = e.target
@@ -701,14 +701,14 @@ Total: ${document.getElementById('total').textContent}`)
     }
   }
 
-  // 6) Listeners y fecha mínima
+  // Listeners y fecha mínima
   document.getElementById('servicio').addEventListener('change', calculateCost)
   document.getElementById('fecha').addEventListener('change', checkAvailability)
   document.getElementById('hora').addEventListener('change', checkAvailability)
   document.getElementById('appointmentForm').addEventListener('submit', submitForm)
   document.getElementById('fecha').min = new Date().toISOString().split('T')[0]
 
-  // 7) Cálculo inicial
+  // Cálculo inicial
   calculateCost()
 </script>
 </body>
